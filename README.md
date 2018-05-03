@@ -21,6 +21,7 @@
     defaultOption = {
         id: "form",                     //需要检查的表单id
         data: {},                       //初始回填 数据对象
+        noEdit: [],                       //设置禁用的项目，由name组成的数组
         noHide: true,                   //是否检查隐藏项，默认不检查
         errClass: 'err',                //检查出错误会在元素上加上的类名
         selfValidate: [],               //自定义验证项.一个数组，元素是项目Id，当检查到该元素时执行对应index回调函数selfValidateCallback;
@@ -45,11 +46,19 @@
         //获取表单值 data 是一个对象
         var data = validate.getFormData();
 
-        //回填数据 （待完善）
+        //回填数据
         validate.fillData(data);
 
-        //设置禁止修改 （待完善）
+        //设置禁止修改
         validate.noEdit([name1,name2]);
+
+        //清空表单 默认值要设置 default-checked="true"
+        validate.clearData();
+
+        //清空表单推荐使用 type="reset" 表单原属性；
+        <form>
+            <input  class="btn"  type="reset" value="清空">
+        </form>
 
 
     </code></pre>

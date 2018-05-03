@@ -13,7 +13,7 @@
 <body>
 <div class="content">
 
-    <div class="form" id="perfectData">
+    <form class="form" id="perfectData">
         <div class="form-part">
             <div class="form-part-title">
                 <h4>企业信息</h4>
@@ -59,13 +59,13 @@
                 </div>
                 <div class="form-item">
                     <div class="form-item-label">email :</div>
-                    <div class="form-item-content"><input validate="email" name="realName" type="text" tabIndex="11" mes="email"></div>
+                    <div class="form-item-content"><input validate="email" name="email" type="text" tabIndex="11" mes="email"></div>
                     <div class="form-item-state">*</div>
                 </div>
                 <div class="form-item">
                     <div class="form-item-label">性别 :</div>
                     <div class="form-item-content">
-                        <label><input validate="required" name="sex" type="radio"  value="1"  mes="性别" checked>男</label>
+                        <label><input validate="required" name="sex" type="radio"  value="1"  mes="性别" default-checked="true" checked>男</label>
                         <label><input validate="required" name="sex" type="radio"  value="0" mes="性别">女</label>
                     </div>
                     <div class="form-item-state">*</div>
@@ -101,8 +101,12 @@
         </div>
         <div class="form-footer">
             <div class="btn" id="two">保存</div>
+            <!--<div class="btn" id="three">清空</div>-->
+            <input  class="btn"  type="reset" value="清空">
+            <div class="btn" id="four">回填</div>
+            <div class="btn" id="five">禁用</div>
         </div>
-    </div>
+    </form>
 
 </div>
 <script src="jquery.min.js"></script>

@@ -4,8 +4,6 @@
  * @description 
  */
 
-
-
 /*
  //回填数据
  validate.fillData(data);
@@ -16,6 +14,8 @@
 function myValidate(paramOption) {
     var defaultOption = {
         id: "form",     //需要检查的表单id
+        data: {},       //回填数据
+        noEdit: [],     //禁止编辑数据
         noHide: true,    //是否检查隐藏项，默认不检查
         errClass: 'err', //检查出错误会在元素上加上的类名
         selfValidate: [],//自定义验证项.一个数组，元素是项目Id，当检查到该元素时执行回调函数selfValidateCallback;
@@ -62,6 +62,7 @@ function myValidate(paramOption) {
             };
         })
     }
+
     //内置正则
     var validatePatterns = {
         // "required": [/^[\S+\s*\S+]+$/ig, "不能为空！"],
@@ -290,6 +291,92 @@ function myValidate(paramOption) {
         }
         return data;
     }
+    
+    //回填表单
+    this.fillData = function (data) {
+        $.each(data,function (i,o) {
+            var name = i;
+            var target =$form.find('[name="'+name+'"]');
+            if(target.length>0){
+                if(target.length>1){
+                    //checkbox 回填
+                    if(target[0].tagName=="INPUT"&&target[0].type=="checkbox"){
+                        if(o!=""){
+                            var arr = o.split(';');
+                            $.each(arr,function (k,val) {
+                                $form.find("[name='"+name+"'][value='"+val+"']").prop('checked',true);
+                            })
+                        }
+                    }
+                    //radio 回填
+                    if(target[0].tagName=="INPUT"&&target[0].type=="radio"){
+                        if(o!=""){
+                            $form.find("[name='"+name+"'][value='"+o+"']").prop('checked',true);
+                        }
+                    }
+                };
+                if(target.length==1){
+                    //div 回填
+                    if(target[0].tagName=="DIV"){
+                        if(o!=""){
+                            target.html(o);
+                        }
+                    }else {
+                        target.val(o);
+                    }
+                };
+            }
+        })
+    };
+
+    //清空表单 推荐使用元素标签 的form 事件<input  class="btn"  type="reset" value="清空">
+    this.clearData = function () {
+        $item.each(function (i,o) {
+            if(o.tagName == "INPUT"){
+                if(o.type == "radio"){
+                    o.checked= false;
+                    $(o).closest(".form-item-content").find("input[default-checked]").prop("checked",true);
+                }else if(o.type=="checkbox"){
+                    o.checked = false
+                }else {
+                    $(o).val('');
+                }
+            };
+            if(o.tagName == "SELECT"){
+                $(o).find('option').eq(0).prop('selected',true);
+            };
+            if(o.tagName == "TEXTAREA"){
+                $(o).val('');
+            };
+            if(o.tagName == "DIV"){
+                $(o).html('');
+            };
+        })
+    };
+
+    //设置不可用项目
+    this.noEdit = function (arr) {
+        $.each(arr,function (i,o) {
+            var target = $form.find("[name='"+o+"']");
+            setInterval(function () {
+                target.attr({
+                    readonly:true,
+                    disabled:true
+                })
+            },100)
+        })
+    }
+
+    //初始化回填表单
+    if(JSON.stringify(option.data)!="{}"){
+        this.fillData(option.data)
+    };
+
+    //初始化设置 禁用
+    if(JSON.stringify(option.noEdit)!="[]"){
+        this.noEdit(option.noEdit);
+    }
+
 }
 
  

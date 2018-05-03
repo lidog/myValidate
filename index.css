@@ -107,13 +107,14 @@ html {
 
 .btn {
     padding: 10px 65px;
-    margin-bottom: 50px;
+    margin-bottom: 10px;
     display: inline-block;
     border-radius: 4px;
     cursor: pointer;
     color: #fff;
     background-color: #3bb4f2;
     border-color: #3bb4f2;
+    border: none;
     user-select: none; }
 
 .btn:active {
@@ -125,6 +126,10 @@ html {
     padding-bottom: 50px;
     max-width: 500px;
     margin: 0 auto; }
+
+*[readonly]{
+    cursor: not-allowed;
+}
 .form .form-part {
     padding-bottom: 30px; }
 .form .form-part .form-part-title {
