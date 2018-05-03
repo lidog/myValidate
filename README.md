@@ -16,6 +16,8 @@
 
 
 ##初始化配置说明
+
+
     defaultOption = {
         id: "form",                     //需要检查的表单id
         data: {},                       //初始回填 数据对象
