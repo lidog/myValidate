@@ -10,13 +10,12 @@
 
 ## 初始化
 
-    //初始化
     var validate = new myValidate({
         id:"perfectData",     //需要检查的表单id
     });
 
-    //初始化配置说明
 
+##初始化配置说明
     defaultOption = {
         id: "form",                     //需要检查的表单id
         data: {},                       //初始回填 数据对象
