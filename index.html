@@ -1,0 +1,113 @@
+<!-- 
+ * @Author lizhenhua
+ * @version 2017-08-10
+ * @description Title
+ -->
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <link rel="stylesheet" href="index.css">
+</head>
+<body>
+<div class="content">
+
+    <div class="form" id="perfectData">
+        <div class="form-part">
+            <div class="form-part-title">
+                <h4>企业信息</h4>
+                <p class="form-part-title-info">账号请使用手机注册，请仔细核对后，填入正确信息。</p>
+            </div>
+            <div class="form-table">
+                <div class="form-item">
+                    <div class="form-item-label">企业名称 :</div>
+                    <div class="form-item-content"><input validate="chineseOnly;required" name="companyName" type="text" tabIndex="5" mes="企业名称"></div>
+                    <div class="form-item-state">*</div>
+                </div>
+                <div class="form-item">
+                    <div class="form-item-label">企业id :</div>
+                    <div class="form-item-content">
+                        <select validate name="renterId">
+                            <option value="a">1</option>
+                            <option value="d">2</option>
+                            <option value="c">3</option>
+                            <option value="b">4</option>
+                        </select>
+                    </div>
+                    <div class="form-item-state">*</div>
+                </div>
+                <div class="form-item">
+                    <div class="form-item-label">地址 :</div>
+                    <div class="form-item-content address">
+                        <input validate="required"  name="provinceId" id="province" suggest-url="" type="text" placeholder="省" tabIndex="8">
+                        <input validate="required"  name="cityId" id="city" suggest-url="" type="text" placeholder="市"  tabIndex="9">
+                        <input validate name="districtId" id="district" suggest-url="" type="text" placeholder="区" mes="区"  tabIndex="10">
+                    </div>
+                    <div class="form-item-state">*</div>
+                </div>
+            </div>
+        </div>
+
+        <div class="form-part">
+            <div class="form-part-title"><h4>账号信息</h4></div>
+            <div class="form-table">
+                <div class="form-item">
+                    <div class="form-item-label">真实姓名 :</div>
+                    <div class="form-item-content"><input validate="chineseOnly;required" name="realName" type="text" tabIndex="11" mes="真实姓名"></div>
+                    <div class="form-item-state">*</div>
+                </div>
+                <div class="form-item">
+                    <div class="form-item-label">email :</div>
+                    <div class="form-item-content"><input validate="email" name="realName" type="text" value="1030595932@qq.com" tabIndex="11" mes="email"></div>
+                    <div class="form-item-state">*</div>
+                </div>
+                <div class="form-item">
+                    <div class="form-item-label">性别 :</div>
+                    <div class="form-item-content">
+                        <label><input validate="required" name="sex" type="radio"  value="1"  mes="性别" checked>男</label>
+                        <label><input validate="required" name="sex" type="radio"  value="0" mes="性别">女</label>
+                    </div>
+                    <div class="form-item-state">*</div>
+                </div>
+                <div class="form-item">
+                    <div class="form-item-label">爱好 :</div>
+                    <div class="form-item-content">
+                        <label><input validate="required" name="interest" type="checkbox"  mes="爱好" value="1">足球</label>
+                        <label><input validate="required" name="interest" type="checkbox"  mes="爱好" value="2">泡妞</label>
+                        <label><input validate="required" name="interest" type="checkbox"  mes="爱好" value="3">音乐</label>
+                        <label><input validate="required" name="interest" type="checkbox"  mes="爱好" value="4">扮靓</label>
+                    </div>
+                    <div class="form-item-state">*</div>
+                </div>
+                <div class="form-item">
+                    <div class="form-item-label">密码 :</div>
+                    <div class="form-item-content"><input validate="password;required" id="userPassword" name="userPassword" type="text"  tabIndex="12" mes="密码"></div>
+                    <div class="form-item-state">*</div>
+                </div>
+                <div class="form-item">
+                    <div class="form-item-label">确认密码 :</div>
+                    <div class="form-item-content"><input validate="check:userPassword" id="confirmPassword" name="confirmPassword" type="password"  tabIndex="13" mes="确认密码"></div>
+                    <div class="form-item-state">*</div>
+                </div>
+                <div class="form-item">
+                    <div class="form-item-label">说明 :</div>
+                    <div class="form-item-content">
+                        <textarea validate="self:/^(\d){6,20}$/g;length:[10,20]" id="more" mes="说明" name="more"></textarea>
+                    </div>
+                    <div class="form-item-state">*</div>
+                </div>
+            </div>
+        </div>
+        <div class="form-footer">
+            <div class="btn" id="two">保存</div>
+        </div>
+    </div>
+
+</div>
+<script src="../jquery.min.js"></script>
+<script src="validate.js"></script>
+<script src="index.js"></script>
+</body>
+</html>
+

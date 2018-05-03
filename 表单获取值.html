@@ -1,0 +1,67 @@
+<!-- 
+ * @Author lizhenhua
+ * @version 2017-08-10
+ * @description Title
+ -->
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <link rel="stylesheet" href="./index.css">
+</head>
+<body>
+<div class="form" id="perfectData">
+    <div class="form-part">
+        <div class="form-item">
+            <div class="form-item-label">说明 :</div>
+            <div class="form-item-content">
+                <textarea validate="self:^\s*$;length:[10,20]" id="more" mes="说明" name="more"></textarea>
+            </div>
+            <div class="form-item-state">*</div>
+        </div>
+
+        <div class="form-item">
+            <div class="form-item-label">爱好 :</div>
+            <div class="form-item-content">
+                <label><input validate="required" name="interest" type="checkbox"  mes="爱好" value="1">足球</label>
+                <label><input validate="required" name="interest" type="checkbox"  mes="爱好" value="2">泡妞</label>
+                <label><input validate="required" name="interest" type="checkbox"  mes="爱好" value="3">音乐</label>
+                <label><input validate="required" name="interest" type="checkbox"  mes="爱好" value="4">扮靓</label>
+            </div>
+            <div class="form-item-state">*</div>
+        </div>
+
+        <div class="form-item">
+            <div class="form-item-label">性别 :</div>
+            <div class="form-item-content">
+                <label><input validate="required" name="sex" type="radio"  value="1"  mes="性别">男</label>
+                <label><input validate="required" name="sex" type="radio"  value="0" mes="性别">女</label>
+            </div>
+            <div class="form-item-state">*</div>
+        </div>
+    </div>
+
+    <button id="submit">提交</button>
+
+</div>
+
+<script type="text/javascript" src="../jquery.min.js"></script>
+<script>
+
+    $("#submit").click(function () {
+        var sex,like,more;
+
+        sex = $('input[type="radio"]:checked').val();
+
+        more = $("#more").val();
+
+        console.log('sex',sex);
+        console.log('more',more);
+        console.log('more',/[\u4E00-\u9FA5]/g.test(more));
+
+    })
+
+</script>
+</body>
+</html>

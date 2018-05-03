@@ -1,0 +1,237 @@
+@charset "UTF-8";
+/*
+ * @Author lizhenhua
+ * @version 2018/4/10
+ * @description
+ */
+body, h1, h2, h3, h4, h5, h6, hr, p, blockquote, dl, dt, dd, ul, ol, li, pre, form, fieldset, legend, button, input, textarea, th, td {
+    margin: 0;
+    padding: 0; }
+
+body, button, input, select, textarea {
+    font: 12px/1.5tahoma, arial, \5b8b\4f53; }
+
+h1, h2, h3, h4, h5, h6 {
+    font-size: 100%; }
+
+address, cite, dfn, em, var {
+    font-style: normal; }
+
+code, kbd, pre, samp {
+    font-family: couriernew, courier, monospace; }
+
+small {
+    font-size: 12px; }
+
+ul, ol {
+    list-style: none; }
+
+a {
+    text-decoration: none;
+    color: #000; }
+
+a:hover {
+    text-decoration: none; }
+
+sup {
+    vertical-align: text-top; }
+
+sub {
+    vertical-align: text-bottom; }
+
+legend {
+    color: #000; }
+
+fieldset, img {
+    border: 0; }
+
+button, input, select, textarea {
+    font-size: 100%; }
+
+table {
+    border-collapse: collapse;
+    border-spacing: 0; }
+
+body {
+    min-height: 100%;
+    height: 900px;
+    font-family: "Microsoft Yahei", Verdana, Simsun, "Segoe UI Web Light", "Segoe UI Light", "Segoe UI Web Regular", "Segoe UI", "Segoe UI Symbol", "Helvetica Neue", Arial; }
+
+.clearfix {
+    *zoom: 1; }
+
+.clearfix:before,
+.clearfix:after {
+    display: table;
+    line-height: 0;
+    content: ""; }
+
+.clearfix:after {
+    clear: both; }
+
+.pt0 {
+    padding-top: 0 !important; }
+
+.pb0 {
+    padding-bottom: 0 !important; }
+
+.pl20 {
+    padding-left: 20px; }
+
+.mr10 {
+    margin-right: 10px; }
+
+.mt10 {
+    margin-top: 10px; }
+
+.tc {
+    text-align: center; }
+
+a {
+    color: #0e90d2; }
+
+.hide {
+    display: none; }
+
+html {
+    height: 100%; }
+
+.content {
+    width: 100%;
+    position: relative; }
+
+.container {
+    width: 1200px;
+    margin: 0 auto; }
+
+
+.btn {
+    padding: 10px 65px;
+    margin-bottom: 50px;
+    display: inline-block;
+    border-radius: 4px;
+    cursor: pointer;
+    color: #fff;
+    background-color: #3bb4f2;
+    border-color: #3bb4f2;
+    user-select: none; }
+
+.btn:active {
+    background-color: #1C516D !important; }
+/*end suggest-input 组件 */
+/*表单*/
+.form {
+    padding-top: 10px;
+    padding-bottom: 50px;
+    max-width: 500px;
+    margin: 0 auto; }
+.form .form-part {
+    padding-bottom: 30px; }
+.form .form-part .form-part-title {
+    padding-left: 30px;
+    padding-bottom: 30px; }
+.form .form-part .form-part-title h4 {
+    font-size: 20px;
+    font-weight: 300; }
+.form .form-part .form-part-title .form-part-title-info {
+    font-size: 14px;
+    color: #9b9b9b;
+    margin-top: 15px; }
+.form .form-item {
+    margin-bottom: 20px;
+    min-width: 200px;
+    white-space: nowrap;
+    /*地址*/
+    /*二维码*/ }
+.form .form-item div {
+    display: inline-block;
+    vertical-align: middle;
+    font-weight: normal;
+    box-sizing: border-box; }
+.form .form-item .form-item-label {
+    width: 30%;
+    font-size: 16px;
+    color: #9b9b9b;
+    min-width: 130px;
+    text-align: right;
+    padding: 0 10px; }
+.form .form-item .form-item-content {
+    width: 60%;
+    min-width: 300px; }
+.form .form-item .form-item-content input {
+    width: 100%;
+    height: 100%;
+    padding: 5px;
+    box-sizing: border-box; }
+.form .form-item .form-item-content label{
+    vertical-align: middle;
+    margin-right: 20px;
+}
+.form .form-item .form-item-content input[type='radio'] {
+    width: auto;
+    height: auto;
+    vertical-align: middle;
+    margin:0 5px;
+    box-sizing: border-box; }
+.form .form-item .form-item-content input[type='checkbox'] {
+    width: auto;
+    height: auto;
+    vertical-align: middle;
+    margin:0 5px;
+    box-sizing: border-box; }
+.form .form-item .form-item-content textarea{
+    width: 100%;
+    min-height: 100px;
+    resize: none;
+    padding: 10px;
+    border-radius: 5px;
+    box-sizing: border-box;
+    background-color: #f2f2f2;
+}
+.form .form-item .form-item-content select{
+    width: 100%;
+    padding:5px 10px;
+}
+
+.form .form-item .form-item-state {
+    color: red;
+    width: 5%;
+    min-width: 20px;
+    text-align: right; }
+.form .form-item .address input {
+    width: 32%;
+    margin-right: 1%; }
+.form .form-item .security-code input {
+    width: 60%;
+    margin-right: 4%; }
+.form .form-item .security-code button {
+    width: 35%;
+    height: 100%;
+    background-color: #3bb4f2;
+    color: #fff;
+    border: none;
+    display: inline-block;
+    vertical-align: middle;
+    padding: 5px 10px;
+    box-sizing: border-box; }
+.form .form-footer {
+    text-align: center; }
+.form .form-footer .btn {
+    display: inline-block; }
+
+.err-key {
+    animation-name: err;
+    animation-duration: 0.5s;
+    animation-iteration-count: infinite; }
+
+@keyframes err {
+    0% {
+        background: #FFA078; }
+    25% {
+        background: transparent; }
+    50% {
+        background: #FFA078; }
+    100% {
+        background: transparent; } }
+
+/*end 表单*/
