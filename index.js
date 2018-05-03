@@ -22,6 +22,7 @@ function initEvent() {
         //验证数据
         if(validate.verify()){
              data = validate.getFormData();
+             console.log(data)
         }
     })
 
