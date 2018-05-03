@@ -16,7 +16,6 @@ function initEvent() {
         id:"perfectData",     //需要检查的表单id
     });
 
-
     //获取数据
     $("#two").click(function () {
         //验证数据
@@ -26,8 +25,6 @@ function initEvent() {
         }
     })
 
-    //验证数据
-    // var verify = validate.verify();
 
 }
 

@@ -32,10 +32,10 @@ function myValidate(paramOption) {
     var $item = $form.find("[" + option.validateItem + "]");
     var obj = {
         text: [],
+        textArea: [],
         select: [],
         checkbox: [],
         radio: [],
-        textArea: [],
         div: [],
     };
     if ($item.length > 0) {
@@ -113,32 +113,36 @@ function myValidate(paramOption) {
                     var patten = _this.getPatten($o);
                     var val = _this.getItemData($o,type,true);
 
-                    if(patten){
+                    //以下会逐个，判断所有的规则
+                    if(patten) {
                         //必填验证 ；validate="required"
-                        if(patten.required&&patten.required.test(val)){
+                        if (patten.required && patten.required.test(val)) {
                             checkAll = false;
                             patten.mes = patten.requiredMes;
-                        }else
+                        };
                         //自定义正则 和 内置正则验证 validate="self:/^(\d){6,20}$/g；email"
                         // if(patten&&patten.reg&&!patten.reg.test(val)){
-                        if(patten.reg){
-                            if(!val.match(patten.reg) || (val.match(patten.reg)==-1)){
+                        if (patten.reg) {
+                            if (!val.match(patten.reg) || (val.match(patten.reg) == -1)) {
                                 checkAll = false;
-                                patten.mes = patten.defaultMes;
+                                //self 正则 与 内置正则 都放在一起处理，消息优先显示自定义 正则
+                                patten.mes = patten.selfMes || patten.defaultMes;
                             }
-                        }else
+                        };
+                        //长度 验证  validate="length:[a,b]"
+                        if (patten.len) {
+                            val = val.replace(/[\u0391-\uFFE5]/g, "aa");
+                            if (!patten.len.test(val)) {
+                                checkAll = false;
+                                patten.mes = patten.lenMes;
+                            }
+                        };
                         //确认对比 验证 check: 源id  validate="check:userPassword"
-                        if(patten.check&&val!=patten.check){
+                        if (patten.check && val != patten.check) {
                             checkAll = false;
                             patten.mes = patten.checkMes;
-                        }else
-                        //长度 验证  validate="length:[a,b]"
-                        if(patten.len&&!patten.len.test(val)){
-                            checkAll = false;
-                            patten.mes = patten.lenMes;
-                        };
+                        }
                     }
-
 
                     if(!checkAll){
                         //如果有错，就运行 自定义错误函数，或者内置 错误函数;并跳出循环
@@ -194,24 +198,24 @@ function myValidate(paramOption) {
                         //内置正则优先使用 内置错误提示 ,此时mes 是 项目名称
                         patten.defaultMes = mes + validatePatterns[pat][1];
                     }
-                };
+                }else
                 if(pat.indexOf("check")!=-1){
                     var once = $("#"+pat.split(':')[1]).val();
                     patten.check = once;
                     patten.checkMes = mes + "不一致";
-                };
+                }else
                 if(pat.indexOf("self")!=-1){
                     // patten.reg = new RegExp(eval("/"+ $.trim(pat.split(':')[1]) +"/g"));  eval 直接返回正则对象，所以不用new了
                     patten.reg = eval( $.trim(pat.split(':')[1]));
                     patten.selfMes = mes;
-                };
+                }else
                 if(pat.indexOf('length')!=-1){
                     var len = eval(pat.split(':')[1]);
                     if(len.length==2){
                         patten.len =eval("/^(\\w){" + len[0] +","+ len[1] + "}$/g");
                         patten.lenMes = "输入长度为"+len[0]+"到"+len[1]+"的字符(中文占2个字符)";
                     }else {
-                        patten.len = eval("/^(\\w){" + len[0] +"}$/g");
+                        patten.len = eval("/^(\\w){" + len[0] +",}$/g");
                         patten.lenMes = "输入长度为"+len[0]+"的字符(中文占2个字符)";
                     }
                 }
