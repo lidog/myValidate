@@ -2,6 +2,6 @@
 
 ### 基于jq 写的一个 表单插件；
 
-(https://github.com/lidog/myValidate/blob/master/EgImages/2.png)
+![Alt 功能模块](https://github.com/lidog/myValidate/blob/master/EgImages/2.png)
 
-(https://github.com/lidog/myValidate/blob/master/EgImages/eg.gif)
+![Alt 演示](https://github.com/lidog/myValidate/blob/master/EgImages/eg.gif)
