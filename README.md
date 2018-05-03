@@ -64,7 +64,7 @@
 
     要配合 html 使用本插件，下面介绍html主要配置：
 
-     ### validate
+### validate
 
     <div class="form-item">
         <div class="form-item-label">企业名称 :</div>
@@ -85,7 +85,7 @@
 
     validate="chineseOnly;required"  //此项目为必填，并且只能是中文；其中 “chineseOnly”为内置正则代名词；
 
-    #### 内置的正则 代名词 有：
+#### 内置的正则 代名词 有：
 
         var validatePatterns = {
             "required": [/^\s*$/g, "不能为空！"],
@@ -118,27 +118,25 @@
             'digitOrLetter': [/^[A-Za-z0-9]*$/, "格式不正确(只支持数字或字母)"]
         };
 
-    ### name
+### name
 
     需要验证的 项目 必须带有 name 属性；
     name 会作为最终 生产的data对象 的key，值为value；
     同时 name 在插件内部也会频繁使用；
-
     var data = validate.getFormData();
     data = {
         yourName："lidog"
     }
-
    你可以通过配置 valKey: "xxx",修改
 
-    ### mes
+### mes
     此属性定义 错误提示
     你可以通过配置 errTips: "xxx",修改
 
-    ### default-checked="true"
+### default-checked="true"
     带有此属性的项目被设置为 默认选中；如果你使用 type="reset" 的方式 重置表单，则不用；
 
-    ### form-item-content
+### form-item-content
     包裹项目的div的class
     你可以通过配置 validateContentName: "xxx",修改
 
