@@ -484,14 +484,6 @@ UI.util = new function() {
 					for ( var i = 0; i < temp.length; i++) {
 						var input = $pre.find('input[type="checkbox"][name="'+name+'"][value="'+temp[i]+'"]');
 						input.prop("checked", true);
-						/*if(input.length == 0){
-								var html = '<label class="checkbox-inline"><input type="checkbox" '
-										+ 'value="' + temp[i] + '" ' + 'name="' + name
-										+ '"><em>' + temp[i] + '</em></label>';
-								$pre.append(html);
-						} else {
-							$('input[type="checkbox"][value="'+temp[i]+'"]').prop("checked", true);
-						}*/
 					}
 				}
 				
