@@ -20,9 +20,11 @@ function myValidate(paramOption) {
         errClass: 'err', //检查出错误会在元素上加上的类名
         selfValidate: [],//自定义验证项.一个数组，元素是项目Id，当检查到该元素时执行回调函数selfValidateCallback;
         selfValidateCallback:[function ($item) {}],
+        validateContentName: "form-item-content", //包裹项目的div的class,
         validateItem: "validate", //自定义属性 查找器,
         valKey: 'name',  //获取值时，返回一个对象集合，此定义一个属性值作为key，name='password' => {password:123}
         errTips: 'mes',  //通过此属性 定义 错误提示
+        errTipsClass: 'err-key',  //错误提示的类名
         errCallback: null,//验证不通过时 的回调函数;参数是第一个出错的项目对象验证信息
     };
     var option = $.extend(true, defaultOption, paramOption);
@@ -166,11 +168,11 @@ function myValidate(paramOption) {
         var $o = patten.$o;
         var $box = $o;
         if($o[0].type == "checkbox"||$o[0].type == "radio"){
-            $box = $o.closest('.form-item-content')
+            $box = $o.closest(option.validateContentName)
         };
-        $box.addClass('err-key');
+        $box.addClass(option.errTipsClass);
         setTimeout(function () {
-            $box.removeClass('err-key');
+            $box.removeClass(option.errTipsClass);
         },500)
         console.log(patten.mes)
     };
@@ -335,7 +337,7 @@ function myValidate(paramOption) {
             if(o.tagName == "INPUT"){
                 if(o.type == "radio"){
                     o.checked= false;
-                    $(o).closest(".form-item-content").find("input[default-checked]").prop("checked",true);
+                    $(o).closest(option.validateContentName).find("input[default-checked]").prop("checked",true);
                 }else if(o.type=="checkbox"){
                     o.checked = false
                 }else {
@@ -365,7 +367,7 @@ function myValidate(paramOption) {
                 })
             },100)
         })
-    }
+    };
 
     //初始化回填表单
     if(JSON.stringify(option.data)!="{}"){
