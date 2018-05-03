@@ -9,7 +9,6 @@
 # 使用方法
 
 ## 初始化
-    <pre><code>
 
     //初始化
     var validate = new myValidate({
@@ -33,12 +32,10 @@
     };
 
 
-    </code></pre>
 
 
 ## 针对业务场景的主要方法；
 
-    <pre><code>
 
         //验证表单所有项目 全部通过返回 true
          validate.verify()
@@ -61,5 +58,4 @@
         </form>
 
 
-    </code></pre>
 
