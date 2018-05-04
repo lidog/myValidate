@@ -19,7 +19,7 @@ function myValidate(paramOption) {
         noHide: true,    //是否检查隐藏项，默认不检查
         errClass: 'err', //检查出错误会在元素上加上的类名
         selfValidate: [],//自定义验证项.一个数组，元素是项目Id，当检查到该元素时执行回调函数selfValidateCallback;
-        selfValidateCallback:[function ($item) {}],
+        selfValidateCallback:[function(patten,val) {}],
         validateContentName: "form-item-content", //包裹项目的div的class,
         validateItem: "validate", //自定义属性 查找器,
         valKey: 'name',  //获取值时，返回一个对象集合，此定义一个属性值作为key，name='password' => {password:123}
@@ -115,6 +115,7 @@ function myValidate(paramOption) {
                     //获取正则与 待验证值
                     var patten = _this.getPatten($o);
                     var val = _this.getItemData($o,type,true);
+                    var idIndex = option.selfValidate.indexOf($o[0].id);
 
                     //以下会逐个，判断所有的规则
                     if(patten) {
@@ -124,12 +125,11 @@ function myValidate(paramOption) {
                             patten.mes = patten.requiredMes;
                         };
                         //自定义正则 和 内置正则验证 validate="self:/^(\d){6,20}$/g；email"
-                        // if(patten&&patten.reg&&!patten.reg.test(val)){
-                        if (patten.reg) {
+                        if (patten.reg&&val!=="") {  //有正则验证，并有值的项目；
                             if (!val.match(patten.reg) || (val.match(patten.reg) == -1)) {
-                                checkAll = false;
                                 //self 正则 与 内置正则 都放在一起处理，消息优先显示自定义 正则
                                 patten.mes = patten.selfMes || patten.defaultMes;
+                                checkAll = false;
                             }
                         };
                         //长度 验证  validate="length:[a,b]"
@@ -144,6 +144,16 @@ function myValidate(paramOption) {
                         if (patten.check && val != patten.check) {
                             checkAll = false;
                             patten.mes = patten.checkMes;
+                        }
+                    }
+
+                    //如果是自定义处理，就执行对应处理函数;处理函数应该返回一个bool 值
+                    if($o[0].id&&idIndex!=-1){
+                        var bool = option.selfValidateCallback[idIndex](patten,val);
+                        if(bool==false||bool==true){
+                            checkAll = bool;
+                        }else {
+                            checkAll = true;
                         }
                     }
 
@@ -168,7 +178,7 @@ function myValidate(paramOption) {
         var $o = patten.$o;
         var $box = $o;
         if($o[0].type == "checkbox"||$o[0].type == "radio"){
-            $box = $o.closest(option.validateContentName)
+            $box = $o.closest("."+option.validateContentName)
         };
         $box.addClass(option.errTipsClass);
         setTimeout(function () {
@@ -187,53 +197,48 @@ function myValidate(paramOption) {
     this.getPatten = function($o) {
         var vldPatterns = $o.attr(option.validateItem).split(';');
         var mes = $o.attr(option.errTips);
-        mes = mes?mes:""
-        if(vldPatterns.length>0&&vldPatterns[0]){
-            var patten = {$o:$o,mes:""};
+        mes = mes?mes:"";
+        var patten = {$o:$o,mes:mes};
+        if(vldPatterns.length>0&&vldPatterns[0]) {
             //通过循环 找到所有配置的正则
-            $.each(vldPatterns,function (i,pat) {
-                if(validatePatterns[pat]){
-                    if(pat=="required"){
+            $.each(vldPatterns, function (i, pat) {
+                if (validatePatterns[pat]) {
+                    if (pat == "required") {
                         patten.required = validatePatterns[pat][0];
                         patten.requiredMes = mes + validatePatterns[pat][1];
-                    }else {
+                    } else {
                         patten.reg = validatePatterns[pat][0];
                         //内置正则优先使用 内置错误提示 ,此时mes 是 项目名称
                         patten.defaultMes = mes + validatePatterns[pat][1];
                     }
-                }else
-                if(pat.indexOf("check")!=-1){
-                    var once = $("#"+pat.split(':')[1]).val();
+                } else if (pat.indexOf("check") != -1) {
+                    var once = $("#" + pat.split(':')[1]).val();
                     patten.check = once;
                     patten.checkMes = mes + "不一致";
-                }else
-                if(pat.indexOf("self")!=-1){
+                } else if (pat.indexOf("self") != -1) {
                     // patten.reg = new RegExp(eval("/"+ $.trim(pat.split(':')[1]) +"/g"));  eval 直接返回正则对象，所以不用new了
-                    patten.reg = eval( $.trim(pat.split(':')[1]));
+                    patten.reg = eval($.trim(pat.split(':')[1]));
                     patten.selfMes = mes;
-                }else
-                if(pat.indexOf('length')!=-1){
+                } else if (pat.indexOf('length') != -1) {
                     var len = eval(pat.split(':')[1]);
-                    if(len.length==2){
-                        patten.len =eval("/^(\\w){" + len[0] +","+ len[1] + "}$/g");
-                        patten.lenMes = "输入长度为"+len[0]+"到"+len[1]+"的字符(中文占2个字符)";
-                    }else {
-                        patten.len = eval("/^(\\w){" + len[0] +",}$/g");
-                        patten.lenMes = "输入长度为"+len[0]+"的字符(中文占2个字符)";
+                    if (len.length == 2) {
+                        patten.len = eval("/^(\\w){" + len[0] + "," + len[1] + "}$/g");
+                        patten.lenMes = "输入长度为" + len[0] + "到" + len[1] + "的字符(中文占2个字符)";
+                    } else {
+                        patten.len = eval("/^(\\w){" + len[0] + ",}$/g");
+                        patten.lenMes = "输入长度为" + len[0] + "的字符(中文占2个字符)";
                     }
                 }
             });
-            return patten;
-        }else {
-            return false
         }
+        return patten;
     };
 
     //获取单个 item的值
     this.getItemData = function ($obj, type,onlyVal) {
         var name = $obj.attr('name');
         var obj = new Object();
-        if (type == 'text'||type =="textArea") {
+        if (type == 'text'||type =="textArea"||type=="select") {
             obj[name] = $.trim($obj.val());
         }
         if (type == 'div') {

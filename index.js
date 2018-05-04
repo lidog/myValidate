@@ -14,7 +14,23 @@ function initEvent() {
 
     //初始化验证
     var validate = new myValidate({
-        id:"perfectData",     //需要检查的表单id
+        //需要检查的表单id
+        id:"perfectData",
+        //自定义错误处理方法；可以在此定义自己的错误提示；
+        errCallback:function (patten) {
+            console.log(patten)
+        },
+        //自定义某个组件的验证方法；当检查到id为 companyName的项时，就会执行与id对应下标的selfValidateCallback；
+        selfValidate:["companyName","realName"],
+        selfValidateCallback:[
+            function (patten,val) {
+                 return true
+            },
+            function (a,b) {
+                console.log(a,b)
+                return false
+            }
+        ]
     });
 
     //获取数据

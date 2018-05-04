@@ -19,19 +19,20 @@
 
 
     defaultOption = {
-        id: "form",     //需要检查的表单id
-        data: {},       //回填数据
-        noEdit: [],     //禁止编辑数据
-        noHide: true,    //是否检查隐藏项，默认不检查
-        selfValidate: [],//自定义验证项.一个数组，元素是项目Id，当检查到该元素时执行回调函数selfValidateCallback;
-        selfValidateCallback:[function ($item) {}],
-        validateContentName: "form-item-content", //包裹项目的div的class,
-        validateItem: "validate", //自定义属性 查找器,
-        valKey: 'name',  //获取值时，返回一个对象集合，此定义一个属性值作为key，name='password' => {password:123}
-        errTips: 'mes',  //通过此属性 定义 错误提示
-        errTipsClass: 'err-key',  //检查出错误会在元素上加上的类名
-        errCallback: null,//验证不通过时 的回调函数;参数是第一个出错的项目对象验证信息
-    };
+            id: "form",     //需要检查的表单id
+            data: {},       //回填数据
+            noEdit: [],     //禁止编辑数据
+            noHide: true,    //是否检查隐藏项，默认不检查
+            errClass: 'err', //检查出错误会在元素上加上的类名
+            selfValidate: [],//自定义验证项.一个数组，元素是项目Id，当检查到该元素时执行回调函数selfValidateCallback;
+            selfValidateCallback:[function(patten,val) {}],
+            validateContentName: "form-item-content", //包裹项目的div的class,
+            validateItem: "validate", //自定义属性 查找器,
+            valKey: 'name',  //获取值时，返回一个对象集合，此定义一个属性值作为key，name='password' => {password:123}
+            errTips: 'mes',  //通过此属性 定义 错误提示
+            errTipsClass: 'err-key',  //错误提示的类名
+            errCallback: null,//验证不通过时 的回调函数;参数是第一个出错的项目对象验证信息
+     };
 
     默认配置都可以通过 配置对应项修改
 
@@ -140,4 +141,8 @@
     包裹项目的div的class
     你可以通过配置 validateContentName: "xxx",修改
 
+
+## 待续解决的问题
+
+    * 验证不按照表单的顺序；
 
