@@ -18,7 +18,7 @@ function initEvent() {
         id:"perfectData",
         //自定义错误处理方法；可以在此定义自己的错误提示；
         errCallback:function (patten) {
-            console.log(patten)
+            validate.showErr(patten)
         },
         //自定义某个组件的验证方法；当检查到id为 companyName的项时，就会执行与id对应下标的selfValidateCallback；
         selfValidate:["companyName","realName"],
