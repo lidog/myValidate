@@ -4,12 +4,6 @@
  * @description 
  */
 
-/*
- //回填数据
- validate.fillData(data);
-
- //设置禁止修改
- validate.noEdit([name1,name2]);*/
 
 function myValidate(paramOption) {
     var defaultOption = {
